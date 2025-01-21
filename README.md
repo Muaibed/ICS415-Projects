@@ -46,9 +46,9 @@ Follow these steps to get started:
 git clone https://github.com/Muaibed/ICS415-Projects.git
 ```
 
-2. Navigate to the repo folder
+2. Navigate to the code folder
 ```bash
-cd ICS415-Projects
+cd ICS415-Projects/code
 ```
 
 3. Make sure that the drawing_base.py and vector3.py files are in the /code folder.
