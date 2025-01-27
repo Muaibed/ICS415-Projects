@@ -8,8 +8,8 @@ class RayTracing02(RayTracing01):
     def __init__(self, width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres, lights):
         super().__init__(width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres)
         self.lights = lights
-
-    def ComputeLighting(self, point, normal):
+        
+    def ComputeLighting(self, point, normal, view, specular):
         """
         :type point: Vector3, location
         :type normal: Vector3, vector
@@ -29,6 +29,12 @@ class RayTracing02(RayTracing01):
                 n_dot_l = normal.dot(vec_l)
                 if n_dot_l > 0:
                     intensity += light.intensity * n_dot_l / (normal.length * vec_l.length)
+
+                if specular != -1:
+                    vec_r = 2 * normal * normal.dot(vec_l)
+                    r_dot_v = view.dot(vec_r)
+                    if r_dot_v > 0:
+                        intensity += light.intensity * pow((r_dot_v / (view.length * vec_r.length)), specular)
 
         return intensity
 
@@ -59,9 +65,9 @@ class RayTracing02(RayTracing01):
         point = origin + closest_t * direction
         normal = (point - closest_sphere.center).normalize()
 
-        color_r = closest_sphere.color[0] * self.ComputeLighting(point, normal)
-        color_g = closest_sphere.color[1] * self.ComputeLighting(point, normal)
-        color_b = closest_sphere.color[2] * self.ComputeLighting(point, normal)
+        color_r = closest_sphere.color[0] * self.ComputeLighting(point, normal, -direction, sphere.specular)
+        color_g = closest_sphere.color[1] * self.ComputeLighting(point, normal, -direction, sphere.specular)
+        color_b = closest_sphere.color[2] * self.ComputeLighting(point, normal, -direction, sphere.specular)
 
         return (int(color_r), int(color_g), int(color_b))
 
