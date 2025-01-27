@@ -5,7 +5,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 from collections import namedtuple
 from vector3 import Vector3
-from raytracing01 import RayTracing
+from raytracing02 import RayTracing02, Light 
 
 Sphere = namedtuple("Sphere", ["center", "radius", "color"])
 
@@ -22,6 +22,12 @@ spheres = [
 width = 600
 height = 600
 
+lights = [
+  Light('AMBIENT', 0.2),
+  Light('POINT', 0.6, Vector3(2, 1, 0)),
+  Light('DIRECTIONAL', 0.2, Vector3(1, 4, 4))
+]
+
 if __name__ == "__main__":
-    app = RayTracing(width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres)
+    app = RayTracing02(width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres, lights)
     app.run()

@@ -2,7 +2,7 @@ from math import sqrt, inf
 from drawing_base import DrawingBase
 
 
-class RayTracing(DrawingBase):
+class RayTracing01(DrawingBase):
     def __init__(self, width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres):
         super().__init__(width, height, viewport_size, projection_plane_z, background_color)
         self.camera_position = camera_position
@@ -69,5 +69,5 @@ class RayTracing(DrawingBase):
                 color = self.traceRay(self.camera_position, direction, 1, inf)
                 self.putPixel(pixels, x, y, color)
 
-        image.save("raytracying01.png")
+        image.save("images/raytracying01.png")
 
