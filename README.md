@@ -65,9 +65,9 @@ To run any assignment or project:
 Replace ## with the number of the assignment/project.
 Run the main file.
 ```bash
-python Assignment-##/main.py
+python Assignment##/main.py
 ```
 or
 ```bash
-python Project-##/main.py
+python Project##/main.py
 ```
