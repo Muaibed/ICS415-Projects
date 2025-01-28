@@ -3,11 +3,21 @@ from drawing_base import DrawingBase
 
 
 class RayTracing01(DrawingBase):
-    def __init__(self, width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres):
-        super().__init__(width, height, viewport_size, projection_plane_z, background_color)
+    def __init__(
+        self,
+        width,
+        height,
+        viewport_size,
+        projection_plane_z,
+        background_color,
+        camera_position,
+        spheres,
+    ):
+        super().__init__(
+            width, height, viewport_size, projection_plane_z, background_color
+        )
         self.camera_position = camera_position
         self.spheres = spheres
-
 
     def intersectRaySphere(self, origin, direction, sphere):
         """
@@ -18,19 +28,18 @@ class RayTracing01(DrawingBase):
         :type sphere: Sphere
         :rtype: [List[int]]
         """
-        oc = origin - sphere.center
-        k1 = direction.dot(direction)
-        k2 = 2 * oc.dot(direction)
-        k3 = oc.dot(oc) - sphere.radius * sphere.radius
+        CO = origin - sphere.center
+        a = direction.dot(direction)
+        b = 2 * CO.dot(direction)
+        c = CO.dot(CO) - sphere.radius * sphere.radius
 
-        discriminant = k2 * k2 - 4 * k1 * k3
+        discriminant = b * b - 4 * a * c
         if discriminant < 0:
             return [inf, inf]
 
-        t1 = (-k2 + sqrt(discriminant)) / (2 * k1)
-        t2 = (-k2 - sqrt(discriminant)) / (2 * k1)
+        t1 = (-b + sqrt(discriminant)) / (2 * a)
+        t2 = (-b - sqrt(discriminant)) / (2 * a)
         return [t1, t2]
-
 
     def traceRay(self, origin, direction, min_t, max_t):
         """
@@ -46,10 +55,10 @@ class RayTracing01(DrawingBase):
 
         for sphere in self.spheres:
             t1, t2 = self.intersectRaySphere(origin, direction, sphere)
-            if t1 < closest_t and min_t < t1 and t1 < max_t:
+            if t1 < closest_t and min_t <= t1 <= max_t:
                 closest_t = t1
                 closest_sphere = sphere
-            if t2 < closest_t and min_t < t2 and t2 < max_t:
+            if t2 < closest_t and min_t <= t2 <= max_t:
                 closest_t = t2
                 closest_sphere = sphere
 
@@ -57,8 +66,6 @@ class RayTracing01(DrawingBase):
             return self.background_color
 
         return closest_sphere.color
-
-
 
     def run(self):
         image, pixels = self.initialize_image()
@@ -70,4 +77,3 @@ class RayTracing01(DrawingBase):
                 self.putPixel(pixels, x, y, color)
 
         image.save("images/raytracying01.png")
-
