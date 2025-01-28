@@ -42,7 +42,7 @@ class RayTracing02(RayTracing01):
                 if light.ltype == "POINT":
                     vec_l = light.position - point
                 else:
-                    vec_l = -light.position  # direction
+                    vec_l = light.position  # direction
 
                 n_dot_l = normal.dot(vec_l)
                 if n_dot_l > 0:
@@ -51,8 +51,8 @@ class RayTracing02(RayTracing01):
                     )
 
                 if specular != -1:
-                    vec_r = 2 * normal * normal.dot(vec_l)
-                    r_dot_v = view.dot(vec_r)
+                    vec_r = 2 * normal * normal.dot(vec_l) - vec_l
+                    r_dot_v = vec_r.dot(view)
                     if r_dot_v > 0:
                         intensity += light.intensity * pow(
                             (r_dot_v / (view.length * vec_r.length)), specular
