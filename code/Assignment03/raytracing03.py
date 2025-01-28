@@ -16,6 +16,7 @@ class RayTracing03(RayTracing02):
         spheres,
         lights,
         EPSILON,
+        recursion_depth,
     ):
         super().__init__(
             width,
@@ -28,6 +29,7 @@ class RayTracing03(RayTracing02):
             lights,
         )
         self.EPSILON = EPSILON
+        self.recursion_depth = recursion_depth
 
     def ComputeLighting(self, point, normal, view, specular):
         """
@@ -93,8 +95,10 @@ class RayTracing03(RayTracing02):
 
         return (closest_sphere, closest_t)
     
+    def reflectRay(self, R, N):
+        return 2 * N * N.dot(R) - R
 
-    def traceRay(self, origin, direction, min_t, max_t):
+    def traceRay(self, origin, direction, min_t, max_t, depth):
         """
         Traces a ray against the set of spheres in the scene.
         :type origin: Vector3
@@ -106,22 +110,34 @@ class RayTracing03(RayTracing02):
         (closest_sphere, closest_t) = self.closestIntersection(origin, direction, min_t, max_t)
 
         if closest_sphere == None:
-            return self.background_color
+            # for calculation
+            return Vector3(self.background_color[0], self.background_color[1], self.background_color[2]) 
 
         point = origin + closest_t * direction
         normal = (point - closest_sphere.center).normalize()
 
-        color_r = closest_sphere.color[0] * self.ComputeLighting(
+        local_color_r = closest_sphere.color[0] * self.ComputeLighting(
             point, normal, -direction, closest_sphere.specular
         )
-        color_g = closest_sphere.color[1] * self.ComputeLighting(
+        local_color_g = closest_sphere.color[1] * self.ComputeLighting(
             point, normal, -direction, closest_sphere.specular
         )
-        color_b = closest_sphere.color[2] * self.ComputeLighting(
+        local_color_b = closest_sphere.color[2] * self.ComputeLighting(
             point, normal, -direction, closest_sphere.specular
         )
+        
+        r = closest_sphere.reflective
+        if r <= 0 or depth <=0:
+            return (int(local_color_r), int(local_color_g), int(local_color_b))
+        
+        reflected_ray = self.reflectRay(-direction, normal)
+        reflected_color = self.traceRay(point, reflected_ray, self.EPSILON, inf, depth-1)
 
-        return (int(color_r), int(color_g), int(color_b))
+        reflected_color_r = (1 - r) * local_color_r + r * reflected_color[0]
+        reflected_color_g = (1 - r) * local_color_g + r * reflected_color[1]
+        reflected_color_b = (1 - r) * local_color_b + r * reflected_color[2] 
+
+        return (int(reflected_color_r), int(reflected_color_g), int(reflected_color_b))
     
     def run(self):
         image, pixels = self.initialize_image()
@@ -129,7 +145,7 @@ class RayTracing03(RayTracing02):
         for x in range(-self.width // 2, self.width // 2):
             for y in range(-self.height // 2, self.height // 2):
                 direction = self.canvasToViewPort((x, y))
-                color = self.traceRay(self.camera_position, direction, 1, inf)
+                color = self.traceRay(self.camera_position, direction, 1, inf, self.recursion_depth)
                 self.putPixel(pixels, x, y, color)
 
         image.save("images/raytracying03.png")

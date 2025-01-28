@@ -17,8 +17,12 @@ class DrawingBase:
         x = self.width // 2 + x
         y = self.height // 2 - y
 
-        if 0 <= x < self.width and 0 <= y < self.height:
-            pixels[x, y] = color
+        if x < 0 or x >= self.width or y < 0  or y >= self.height:
+            return
+
+        r, g, b = int(color[0]), int(color[1]), int(color[2])
+
+        pixels[x, y] = (r, g, b)
 
 
     def canvasToViewPort(self, p2d):
