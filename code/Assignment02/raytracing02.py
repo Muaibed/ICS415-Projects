@@ -85,7 +85,8 @@ class RayTracing02(RayTracing01):
             return self.background_color
 
         point = origin + closest_t * direction
-        normal = (point - closest_sphere.center).normalize()
+        normal = point - closest_sphere.center
+        normal = normal.normalize()
 
         color_r = closest_sphere.color[0] * self.ComputeLighting(
             point, normal, -direction, sphere.specular
