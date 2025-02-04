@@ -30,5 +30,5 @@ lights = [
 ]
 
 if __name__ == "__main__":
-    app = RayTracing02(width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres, lights)
+    app = RayTracing02("raytracing02.png", width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres, lights)
     app.run()

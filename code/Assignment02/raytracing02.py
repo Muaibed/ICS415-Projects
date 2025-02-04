@@ -7,6 +7,7 @@ from Assignment01.raytracing01 import RayTracing01
 class RayTracing02(RayTracing01):
     def __init__(
         self,
+        save_filename,
         width,
         height,
         viewport_size,
@@ -17,6 +18,7 @@ class RayTracing02(RayTracing01):
         lights,
     ):
         super().__init__(
+            save_filename,
             width,
             height,
             viewport_size,
@@ -109,7 +111,7 @@ class RayTracing02(RayTracing01):
                 color = self.traceRay(self.camera_position, direction, 1, inf)
                 self.putPixel(pixels, x, y, color)
 
-        image.save("images/raytracying02.png")
+        image.save("images/" + self.save_filename)
 
 
 class Light(object):
