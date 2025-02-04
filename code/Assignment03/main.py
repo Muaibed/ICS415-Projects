@@ -34,5 +34,5 @@ EPSILON = 0.001
 recursion_depth = 3
 
 if __name__ == "__main__":
-    app = RayTracing03(width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres, lights, EPSILON, recursion_depth)
+    app = RayTracing03("raytracing03.png", width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres, lights, EPSILON, recursion_depth)
     app.run()

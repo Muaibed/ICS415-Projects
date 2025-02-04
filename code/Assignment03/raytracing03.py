@@ -7,6 +7,7 @@ from Assignment02.raytracing02 import RayTracing02
 class RayTracing03(RayTracing02):
     def __init__(
         self,
+        save_filename,
         width,
         height,
         viewport_size,
@@ -19,6 +20,7 @@ class RayTracing03(RayTracing02):
         recursion_depth,
     ):
         super().__init__(
+            save_filename,
             width,
             height,
             viewport_size,
@@ -148,4 +150,4 @@ class RayTracing03(RayTracing02):
                 color = self.traceRay(self.camera_position, direction, 1, inf, self.recursion_depth)
                 self.putPixel(pixels, x, y, color)
 
-        image.save("images/raytracying03.png")
+        image.save("images/" + self.save_filename)
