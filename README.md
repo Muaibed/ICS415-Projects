@@ -15,24 +15,27 @@ This course covers the fundamentals of computer graphics, including:
 
 ## Assignments
 
-1. **Assignment-01:** Basic Ray Tracing 
+1. **Assignment01:** Basic Ray Tracing 
    - Implement a ray tracer with only ambient light
 
-2. **Assignment-02:** Ray Tracing - Reflection
+2. **Assignment02:** Ray Tracing - Reflection
    - Implement a ray tracer with diffuse and specular reflections
+
+3. **Assignment03:** Ray Tracing - Shadow
+   - Implement a ray tracer with shadows and reflections
 
 
 ## Projects 
-1. **Project-01:** Ray Tracer
+1. **Project01:** Ray Tracer
    - A ray tracer with lights, reflections, shadows, camera positioning transparency, refraction, and supersampling.
 
-2. **Project-02:** Shader Programming
+2. **Project02:** Shader Programming
    - A fragment shader in GLSL/HLSL that applies a filter to an image.
 
-3. **Project-03:** Rasterization
+3. **Project03:** Rasterization
    - A Minecraft-like game engine.
 
-4. **Project-04:** Curves
+4. **Project04:** Curves
    - visual Bezier curve editor.
 
 
