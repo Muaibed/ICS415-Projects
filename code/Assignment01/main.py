@@ -23,5 +23,5 @@ width = 600
 height = 600
 
 if __name__ == "__main__":
-    app = RayTracing01(width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres)
+    app = RayTracing01('raytracing01.png', width, height, viewport_size, projection_plane_z, background_color, camera_position, spheres)
     app.run()

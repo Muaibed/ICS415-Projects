@@ -5,6 +5,7 @@ from drawing_base import DrawingBase
 class RayTracing01(DrawingBase):
     def __init__(
         self,
+        save_filename,
         width,
         height,
         viewport_size,
@@ -18,6 +19,7 @@ class RayTracing01(DrawingBase):
         )
         self.camera_position = camera_position
         self.spheres = spheres
+        self.save_filename = save_filename
 
     def intersectRaySphere(self, origin, direction, sphere):
         """
@@ -76,4 +78,4 @@ class RayTracing01(DrawingBase):
                 color = self.traceRay(self.camera_position, direction, 1, inf)
                 self.putPixel(pixels, x, y, color)
 
-        image.save("images/raytracying01.png")
+        image.save("images/" + self.save_filename)
