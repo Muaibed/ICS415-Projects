@@ -21,5 +21,10 @@ cd ICS415-Projects/code
 pip install Pillow
 ```
 
+6. Run the main file.
+```bash
+python Project01/main.py
+```
+
 ## Result
 <img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/images/Project01.png" alt="Project01-Result" width="400">
