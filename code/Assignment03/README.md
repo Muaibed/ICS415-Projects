@@ -21,16 +21,9 @@ cd ICS415-Projects/code
 pip install Pillow
 ```
 
-
-To run any assignment or project:
-Replace ## with the number of the assignment/project.
-Run the main file.
+6. Run the main file.
 ```bash
-python Assignment##/main.py
-```
-or
-```bash
-python Project##/main.py
+python Assignment02/main.py
 ```
 
 ## Result
