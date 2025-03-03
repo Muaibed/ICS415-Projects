@@ -16,6 +16,11 @@ cd ICS415-Projects/code
 
 4. Make sure Python 3 is installed
 
+5. Run the main file.
+```bash
+python Assignment01/main.py
+```
+
 
 ## Result
 <img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/images/raytracing01.png" alt="Assignment01-Result" width="400">
