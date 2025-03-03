@@ -43,9 +43,13 @@ This course covers the fundamentals of computer graphics, including:
 
 2. **Project02:** Shader Programming
    - A fragment shader in GLSL/HLSL that applies a filter to an image.
+  
+   <img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/images/Project02.png" alt="Project02-Result" width="400">
+
 
 3. **Project03:** Rasterization
    - A Minecraft-like game engine.
+
 
 4. **Project04:** Curves
    - visual Bezier curve editor.
