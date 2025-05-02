@@ -49,6 +49,7 @@ This course covers the fundamentals of computer graphics, including:
 
 3. **Project03:** Rasterization
    - A Minecraft-like game engine.
+     [Download or view the video](../results/Project03.mp4)
 
 
 4. **Project04:** Curves
