@@ -18,8 +18,8 @@ background_color = (230, 230, 255)
 spheres = [
     Sphere(Vector3(0.0, -1000.0, 0.0), 1000.0, Vector3(200, 200, 200), 0, 0), # Ground
     Sphere(Vector3(-0.4, 0.8, 8), 0.8, (255, 255, 0), 0, 0),
-    Sphere(Vector3(0.3, 0.8, 6), 0.8, (0, 0, 255), 0, 0.7),
-    Sphere(Vector3(0.9, 0.8, 4), 0.8, (255, 255, 0), 0, 0.99),
+    Sphere(Vector3(0.3, 0.8, 6), 0.8, (0, 0, 255), 0, 0.6),
+    Sphere(Vector3(0.9, 0.8, 4), 0.8, (255, 255, 0), 0, 0.8),
 ]
 
     
@@ -50,8 +50,8 @@ for _ in range(semireflective_spheres):
     spheres.append(generate_sphere(radius, specular, reflective))    
 
 
-width = 1000
-height = 1000
+width = 2000
+height = 2000
 
 lights = [
   Light('AMBIENT', 0.4),

@@ -1,4 +1,5 @@
 from PIL import Image
+from multiprocessing import Pool
 from math import sqrt, inf
 from vector3 import Vector3
 from Assignment02.raytracing02 import RayTracing02
@@ -141,13 +142,20 @@ class RayTracing03(RayTracing02):
 
         return (int(reflected_color_r), int(reflected_color_g), int(reflected_color_b))
     
+    def render_pixel(self, args):
+        x, y = args
+        direction = self.canvasToViewPort((x, y))
+        return (x, y, self.traceRay(self.camera_position, direction, 1, inf, self.recursion_depth))
+    
     def run(self):
         image, pixels = self.initialize_image()
 
-        for x in range(-self.width // 2, self.width // 2):
-            for y in range(-self.height // 2, self.height // 2):
-                direction = self.canvasToViewPort((x, y))
-                color = self.traceRay(self.camera_position, direction, 1, inf, self.recursion_depth)
-                self.putPixel(pixels, x, y, color)
+        pool = Pool()
+
+        pixel_args = [(x, y) for x in range(-self.width//2, self.width//2) 
+                      for y in range(-self.height//2, self.height//2)]
+
+        for x, y, color in pool.map(self.render_pixel, pixel_args):
+            self.putPixel(pixels, x, y, color)
 
         image.save("images/" + self.save_filename)
