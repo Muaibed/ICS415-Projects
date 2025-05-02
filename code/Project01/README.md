@@ -27,4 +27,4 @@ python Project01/main.py
 ```
 
 ## Result
-<img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/images/Project01.png" alt="Project01-Result" width="400">
+<img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/results/Project01.png" alt="Project01-Result" width="400">
