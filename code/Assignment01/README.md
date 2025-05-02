@@ -23,4 +23,4 @@ python Assignment01/main.py
 
 
 ## Result
-<img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/images/raytracing01.png" alt="Assignment01-Result" width="400">
+<img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/results/raytracing01.png" alt="Assignment01-Result" width="400">
