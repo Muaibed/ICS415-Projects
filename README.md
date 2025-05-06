@@ -54,3 +54,4 @@ This course covers the fundamentals of computer graphics, including:
 
 4. **Project04:** Curves
    - visual Bezier curve editor.
+     [Download or view the video](../results/Project04.mp4)
