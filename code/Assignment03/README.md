@@ -27,5 +27,5 @@ python Assignment02/main.py
 ```
 
 ## Result
-<img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/images/raytracing03.png" alt="Assignment03-Result" width="400">
+<img src="https://github.com/Muaibed/ICS415-Projects/raw/main/code/results/raytracing03.png" alt="Assignment03-Result" width="400">
 
