@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Bézier Curve Editor</title>
+  <style>
+    canvas {
+      border: 1px solid #ccc;
+      display: block;
+      margin: 20px auto;
+      cursor: crosshair;
+    }
+    h1 {
+        text-align: center;
+    }
+  </style>
+</head>
+<body>
+    <h1>Poly Bezier Curves</h1>
+<canvas id="canvas" width="1000" height="600"></canvas>
+<script>
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+let curves = [[]]; 
+let draggingPoint = null;
+let dragOffset = { x: 0, y: 0 };
+
+canvas.addEventListener("mousedown", (e) => {
+  const { x, y } = getMousePos(e);
+  for (const curve of curves) {
+    for (let pt of curve) {
+      if (distance(pt, { x, y }) < 8) {
+        draggingPoint = pt;
+        dragOffset.x = pt.x - x;
+        dragOffset.y = pt.y - y;
+        return;
+      }
+    }
+  }
+
+  const currentCurve = curves[curves.length - 1];
+  currentCurve.push({ x, y });
+
+  if (currentCurve.length % 3 === 1 && currentCurve.length > 1) {
+    curves.push([{ x, y }]);
+  }
+
+  draw();
+});
+
+canvas.addEventListener("mousemove", (e) => {
+  if (draggingPoint) {
+    const { x, y } = getMousePos(e);
+    draggingPoint.x = x + dragOffset.x;
+    draggingPoint.y = y + dragOffset.y;
+    draw();
+  }
+});
+
+canvas.addEventListener("mouseup", () => draggingPoint = null);
+
+function getMousePos(e) {
+  const rect = canvas.getBoundingClientRect();
+  return {
+    x: e.clientX - rect.left,
+    y: e.clientY - rect.top
+  };
+}
+
+function distance(p1, p2) {
+  return Math.hypot(p1.x - p2.x, p1.y - p2.y);
+}
+
+function drawBezier(ctx, pts) {
+  ctx.beginPath();
+  ctx.moveTo(pts[0].x, pts[0].y);
+  for (let i = 1; i < pts.length; i += 3) {
+    if (i + 2 < pts.length) {
+      ctx.bezierCurveTo(
+        pts[i].x, pts[i].y,
+        pts[i + 1].x, pts[i + 1].y,
+        pts[i + 2].x, pts[i + 2].y
+      );
+    }
+  }
+  ctx.strokeStyle = "black";
+  ctx.lineWidth = 2;
+  ctx.stroke();
+}
+
+function drawControlLines(ctx, pts) {
+  ctx.strokeStyle = "#999";
+  ctx.setLineDash([5, 5]);
+  ctx.beginPath();
+  for (let i = 0; i < pts.length - 1; i++) {
+    ctx.moveTo(pts[i].x, pts[i].y);
+    ctx.lineTo(pts[i + 1].x, pts[i + 1].y);
+  }
+  ctx.stroke();
+  ctx.setLineDash([]);
+}
+
+function drawPoints(ctx, pts) {
+  for (let pt of pts) {
+    ctx.beginPath();
+    ctx.arc(pt.x, pt.y, 6, 0, Math.PI * 2);
+    ctx.fillStyle = "#007bff";
+    ctx.fill();
+    ctx.strokeStyle = "#fff";
+    ctx.lineWidth = 2;
+    ctx.stroke();
+  }
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  for (const curve of curves) {
+    if (curve.length > 1) {
+      drawControlLines(ctx, curve);
+      drawBezier(ctx, curve);
+      drawPoints(ctx, curve);
+    } else {
+      drawPoints(ctx, curve);
+    }
+  }
+}
+
+draw();
+</script>
+</body>
+</html>
